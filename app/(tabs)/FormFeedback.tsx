@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 import {
   View,
   Text,
@@ -11,22 +11,21 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   StatusBar,
-} from "react-native";
-import { ref, push, serverTimestamp } from "firebase/database";
-import { auth, dbRealtime } from "../../config/firebase";
-import { Card } from "@rneui/themed";
-import { Ionicons } from "@expo/vector-icons";
-import { AirbnbRating, Rating } from "react-native-ratings";
+} from 'react-native';
+import { ref, push, serverTimestamp } from 'firebase/database';
+import { auth, dbRealtime } from '../../config/firebase';
+import { Ionicons } from '@expo/vector-icons';
+import { AirbnbRating, Rating } from 'react-native-ratings';
 
 export default function FormFeedback() {
   const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   function extractNameFromEmail(email: string): string {
-    const [user] = email.split("@");
+    const [user] = email.split('@');
 
-    const onlyLetters = user.replace(/[^a-zA-Z]/g, "");
+    const onlyLetters = user.replace(/[^a-zA-Z]/g, '');
 
     const wordsFinal = onlyLetters.match(/[A-Z]?[a-z]+/g) ||
       onlyLetters.match(/[a-z]{2,}/gi) || [onlyLetters];
@@ -35,21 +34,21 @@ export default function FormFeedback() {
         (palavra) =>
           palavra.charAt(0).toUpperCase() + palavra.slice(1).toLowerCase()
       )
-      .join(" ");
+      .join(' ');
 
     return nameFinal.trim();
   }
 
   const handleSubmit = async () => {
     if (rating === 0) {
-      Alert.alert("⚠️ Atenção", "Por favor, selecione uma nota para continuar");
+      Alert.alert('⚠️ Atenção', 'Por favor, selecione uma nota para continuar');
       return;
     }
 
     if (comment.length < 10) {
       Alert.alert(
-        "⚠️ Atenção",
-        "O comentário deve ter no mínimo 10 caracteres"
+        '⚠️ Atenção',
+        'O comentário deve ter no mínimo 10 caracteres'
       );
       return;
     }
@@ -57,7 +56,7 @@ export default function FormFeedback() {
     setIsSubmitting(true);
 
     try {
-      const feedbackRef = ref(dbRealtime, "feedbacks");
+      const feedbackRef = ref(dbRealtime, 'feedbacks');
       await push(feedbackRef, {
         userId: auth.currentUser?.uid,
         userName:
@@ -69,19 +68,19 @@ export default function FormFeedback() {
       });
 
       Alert.alert(
-        "✅ Sucesso!",
-        "Seu feedback foi enviado com sucesso. Obrigado pela sua opinião!",
-        [{ text: "OK", style: "default" }]
+        '✅ Sucesso!',
+        'Seu feedback foi enviado com sucesso. Obrigado pela sua opinião!',
+        [{ text: 'OK', style: 'default' }]
       );
 
       setRating(0);
-      setComment("");
+      setComment('');
     } catch (error) {
-      console.error("Erro ao enviar feedback: ", error);
+      console.error('Erro ao enviar feedback: ', error);
       Alert.alert(
-        "❌ Erro",
-        "Não foi possível enviar o feedback. Tente novamente.",
-        [{ text: "OK", style: "default" }]
+        '❌ Erro',
+        'Não foi possível enviar o feedback. Tente novamente.',
+        [{ text: 'OK', style: 'default' }]
       );
     } finally {
       setIsSubmitting(false);
@@ -90,29 +89,29 @@ export default function FormFeedback() {
 
   const getRatingText = (rating: number) => {
     const texts = {
-      1: "Muito Ruim",
-      2: "Ruim",
-      3: "Regular",
-      4: "Bom",
-      5: "Excelente",
+      1: 'Muito Ruim',
+      2: 'Ruim',
+      3: 'Regular',
+      4: 'Bom',
+      5: 'Excelente',
     };
-    return texts[rating as keyof typeof texts] || "";
+    return texts[rating as keyof typeof texts] || '';
   };
 
   const getRatingColor = (rating: number) => {
     const colors = {
-      1: "#EF4444",
-      2: "#F97316",
-      3: "#EAB308",
-      4: "#22C55E",
-      5: "#10B981",
+      1: '#EF4444',
+      2: '#F97316',
+      3: '#EAB308',
+      4: '#22C55E',
+      5: '#10B981',
     };
-    return colors[rating as keyof typeof colors] || "#6B7280";
+    return colors[rating as keyof typeof colors] || '#6B7280';
   };
 
   const getRatingEmoji = (rating: number) => {
-    const emojis = { 1: "😞", 2: "😕", 3: "😐", 4: "😊", 5: "😍" };
-    return emojis[rating as keyof typeof emojis] || "";
+    const emojis = { 1: '😞', 2: '😕', 3: '😐', 4: '😊', 5: '😍' };
+    return emojis[rating as keyof typeof emojis] || '';
   };
 
   return (
@@ -123,7 +122,7 @@ export default function FormFeedback() {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.content}>
-          <Card containerStyle={styles.card}>
+          <View style={styles.card}>
             <View style={styles.headerSection}>
               <View style={styles.iconContainer}>
                 <Ionicons
@@ -142,7 +141,7 @@ export default function FormFeedback() {
               <Text style={styles.sectionTitle}>Avaliação</Text>
               <AirbnbRating
                 count={5}
-                reviews={["Muito Ruim", "Ruim", "Regular", "Bom", "Excelente"]}
+                reviews={['Muito Ruim', 'Ruim', 'Regular', 'Bom', 'Excelente']}
                 defaultRating={rating}
                 size={32}
                 onFinishRating={setRating}
@@ -236,7 +235,7 @@ export default function FormFeedback() {
                 </View>
               )}
             </TouchableOpacity>
-          </Card>
+          </View>
         </View>
       </ScrollView>
     </View>
@@ -246,23 +245,23 @@ export default function FormFeedback() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F9FAFB",
+    backgroundColor: '#F9FAFB',
   },
   header: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingHorizontal: 20,
     paddingTop: 60,
     paddingBottom: 20,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: '#FFFFFF',
     borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
+    borderBottomColor: '#E5E7EB',
   },
   headerTitle: {
     fontSize: 24,
-    fontWeight: "700",
-    color: "#111827",
+    fontWeight: '700',
+    color: '#111827',
   },
   scrollContainer: {
     flexGrow: 1,
@@ -271,13 +270,13 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   card: {
     borderRadius: 16,
     padding: 24,
     marginVertical: 20,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -285,34 +284,34 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 4,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     borderWidth: 0,
   },
   headerSection: {
-    alignItems: "center",
+    alignItems: 'center',
     marginBottom: 32,
   },
   iconContainer: {
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: "#EFF6FF",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#EFF6FF',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 16,
   },
   title: {
     fontSize: 22,
-    fontWeight: "700",
-    color: "#111827",
+    fontWeight: '700',
+    color: '#111827',
     marginTop: 8,
-    textAlign: "center",
+    textAlign: 'center',
   },
   subtitle: {
     fontSize: 16,
-    color: "#6B7280",
+    color: '#6B7280',
     marginTop: 8,
-    textAlign: "center",
+    textAlign: 'center',
     lineHeight: 22,
   },
   ratingSection: {
@@ -320,14 +319,14 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: "600",
-    color: "#374151",
+    fontWeight: '600',
+    color: '#374151',
     marginBottom: 16,
   },
   ratingFeedback: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 16,
     paddingVertical: 10,
     paddingHorizontal: 16,
@@ -339,74 +338,74 @@ const styles = StyleSheet.create({
   },
   ratingText: {
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   commentSection: {
     marginBottom: 24,
   },
   inputContainer: {
-    position: "relative",
+    position: 'relative',
   },
   input: {
     borderWidth: 2,
-    borderColor: "#E5E7EB",
+    borderColor: '#E5E7EB',
     padding: 16,
     borderRadius: 12,
     fontSize: 16,
-    textAlignVertical: "top",
+    textAlignVertical: 'top',
     minHeight: 120,
-    backgroundColor: "#F9FAFB",
-    color: "#374151",
+    backgroundColor: '#F9FAFB',
+    color: '#374151',
     lineHeight: 24,
   },
   inputValid: {
-    borderColor: "#10B981",
+    borderColor: '#10B981',
   },
   inputInvalid: {
-    borderColor: "#EF4444",
+    borderColor: '#EF4444',
   },
   charCounter: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 12,
     right: 12,
     fontSize: 12,
-    color: "#9CA3AF",
-    backgroundColor: "#F9FAFB",
+    color: '#9CA3AF',
+    backgroundColor: '#F9FAFB',
     paddingHorizontal: 6,
     paddingVertical: 2,
     borderRadius: 4,
   },
   charCounterValid: {
-    color: "#10B981",
+    color: '#10B981',
   },
   charCounterInvalid: {
-    color: "#EF4444",
+    color: '#EF4444',
   },
   validationMessage: {
     fontSize: 12,
-    color: "#EF4444",
+    color: '#EF4444',
     marginTop: 6,
     marginLeft: 4,
   },
   submitButton: {
     borderRadius: 12,
-    overflow: "hidden",
+    overflow: 'hidden',
     marginTop: 8,
-    backgroundColor: "#3B82F6",
+    backgroundColor: '#3B82F6',
   },
   submitButtonDisabled: {
-    backgroundColor: "#D1D5DB",
+    backgroundColor: '#D1D5DB',
   },
   submitButtonContent: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingVertical: 16,
   },
   submitButtonText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
     marginLeft: 8,
   },
 });

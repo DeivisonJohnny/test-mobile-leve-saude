@@ -27,12 +27,6 @@ Após a instalação, abra o aplicativo e faça login com as credenciais de test
 - **Email**: `teste@gmail.com`
 - **Senha**: `93186145`
 
-## ⚠️ Requisitos do Sistema
-
-- **Sistema Operacional**: Android 5.0 (API level 21) ou superior
-- **Espaço de Armazenamento**: Mínimo de 50MB livres
-- **Conexão com Internet**: Necessária para login e sincronização
-
 ## 🚀 Primeiros Passos
 
 1. Baixe e instale o APK seguindo as instruções acima
@@ -64,21 +58,6 @@ Após a instalação, abra o aplicativo e faça login com as credenciais de test
 - Verifique se seu dispositivo atende aos requisitos mínimos
 - Tente reinstalar o aplicativo
 - Entre em contato com o suporte se o problema persistir
-
-## 📞 Suporte
-
-Para dúvidas ou problemas com a instalação ou uso do aplicativo:
-
-- **Email**: suporte@levesaude.com
-- **Telefone**: (11) 9999-9999
-
----
-
-**Nota**:
-
-- Este aplicativo não está disponível na Google Play Store
-- A instalação deve ser feita através do arquivo APK fornecido
-- Use apenas as credenciais de teste fornecidas para acesso inicial
 
 ```
 

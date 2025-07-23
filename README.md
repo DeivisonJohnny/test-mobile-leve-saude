@@ -6,7 +6,7 @@ Aplicativo mobile para cuidados com a saúde.
 
 ### 1. Baixe o APK
 
-[📥 Download LeveSaude.apk](./release/LeveSaude.apk)
+<a href="./release/LeveSaude.apk" download>📥 Download LeveSaude.apk</a>
 
 ### 2. Instale o Aplicativo
 

@@ -58,7 +58,3 @@ Após a instalação, abra o aplicativo e faça login com as credenciais de test
 - Verifique se seu dispositivo atende aos requisitos mínimos
 - Tente reinstalar o aplicativo
 - Entre em contato com o suporte se o problema persistir
-
-```
-
-```
